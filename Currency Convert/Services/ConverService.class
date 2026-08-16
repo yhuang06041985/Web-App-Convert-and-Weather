@@ -1,0 +1,31 @@
+using System;
+using System.Threading.Tasks;
+using Currency_Convert.Services.Interfaces;
+using System.Net.Http.HttpClient;
+
+namespace Currency_Convert.Services
+{
+    public class ConverService : IConverService
+    {
+      private readonly HttpClient _httpClient;
+      private readonly string _apiKey = "YOUR_API_KEY";
+      private readonly string _apiUrl = "https://api.frankfurter.dev/v2/rate";
+
+      public ConverService(HttpClient httpClient)
+      {
+          _httpClient = httpClient;
+      }
+
+      public async Task<decimal> GetConversionRateAsync(string fromCurrency, string toCurrency, decimal amount)
+      {
+          // Implement your currency conversion logic here
+          // For example, you can call an external API to get the conversion rate
+          // and then calculate the converted amount.
+          // This is just a placeholder implementation.
+          decimal conversionRate = await _httpClient.GetFromJsonAsync<decimal>($"{_apiUrl}?from={fromCurrency}&to={toCurrency}");
+         
+          return amount * conversionRate;
+      }
+
+    }
+}

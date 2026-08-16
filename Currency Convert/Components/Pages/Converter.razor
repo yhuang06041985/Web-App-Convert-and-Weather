@@ -1,0 +1,206 @@
+@page "/Converter"
+@rendermode InteractiveServer
+@inject IConvertCurrence _currencyConverterService
+
+<PageTitle>Currency Converter</PageTitle>
+
+<div class="container">
+  <p><h2>Welcome to Currency Converter</h2></p>
+  <div class="table">
+    <div class="row">
+      <div class="col-5 px-2 py-1 m-1">
+            <label class="form-label" for="currencySelect">From Currency:</label>
+
+       </div>
+            <div class="col-5 px-2 py-1 m-1">
+
+                <select class="form-select" @onchange="Selected_From">
+                    <option value="">  <b>--Select From Currency--</b></option>
+
+                        @foreach (var currency in currencies)
+                        {
+                            <option value="@currency.Code">@currency.Name (@currency.Symbol)</option>
+                        }
+                    
+                </select>
+
+            </div>
+       
+  </div>
+        <div class="row">
+            <div class="col-5 px-2 py-1 m-1">
+
+                <label class="form-label" for="currencySelect">To Currency:</label>
+            </div>
+            
+            <div class="col-5 px-2 py-1 m-1">
+                <select class="form-select" @onchange="Selected_To">
+                 <option value="">  <b>--Select To Currency--</b></option>
+                   
+                @foreach(var currency in currencies)
+                {
+                    <option value="@currency.Code">@currency.Name (@currency.Symbol)</option>
+                }
+          
+             </select>
+               
+           
+        </div>
+        <div class="row">
+                <div class="col-5 px-2 py-1 m-1">
+              <label class="form-label" for="currencySelect">Enter Amount:</label>
+
+         </div>
+         <div class="col-5 px-2 py-1 m-1">
+            <input type="text" @bind="amountToBeConverted" @onblur="validate_number" />
+        </div>  
+      </div>
+      <div class="row">
+                <div class="col-5 px-2 py-1 m-1">  </div>
+                <div class="col-5 px-2 py-1 m-1">
+            <button class="btn btn-primary" @onclick="Convert_currency"> Convert</button>
+        </div>
+      </div>
+      <div class="row">
+                <h4 class="text-danger">@messages   </h4>
+                @if (convertedAmount > 0)
+                {
+                    <p><h4>Convert Rate: @exchangeRate</h4></p>
+                    <p><h4 class="text-success">Convert Amount: @convertedAmount  @toSymbal</h4> </p>
+                }
+                
+      </div>
+    </div>
+   </div>
+</div>
+
+
+
+ @code
+{
+    private string fromCurrency;
+    private string toCurrency;
+    private  string amountToBeConverted ;
+    private string messages;
+    private decimal convertedAmount;
+    private List<Currency> currencies;
+    private Currency toCurrencyObj;
+    private string toSymbal;
+    private decimal exchangeRate;
+
+    protected override void OnInitialized()
+    {
+        currencies = new()
+       {
+          new() { Code = "USD", Name = "US Dollar", Symbol = "$" },
+          new() { Code = "EUR", Name = "Euro", Symbol = "€" },
+          new() { Code = "GBP", Name = "British Pound", Symbol = "£" },
+          new() { Code = "JPY", Name = "Japanese Yen", Symbol = "¥" },
+          new() { Code = "CNY", Name = "Chinese Yuan", Symbol = "¥" },
+          new() { Code = "CAD", Name = "Canadian Dollar", Symbol = "C$" },
+          new() { Code = "AUD", Name = "Australian Dollar", Symbol = "A$" },
+          new() { Code = "INR", Name = "Indian Rupee", Symbol = "₹" },
+          new() { Code = "KRW", Name = "South Korean Won", Symbol = "₩" },
+          new() { Code = "THB", Name = "Thai Baht", Symbol = "฿" },
+          new () { Code = "CHF", Name = "Swiss Franc", Symbol = "CHF" },
+          new () { Code = "SEK", Name = "Swedish Krona", Symbol = "SEK" },
+          new () { Code = "NZD", Name = "New Zealand Dollar", Symbol = "NZD" },
+          new () { Code = "SGD", Name = "Singapore Dollar", Symbol = "SGD" },
+          new () { Code = "HKD", Name = "Hong Kong Dollar", Symbol = "HKD" },
+          new () { Code = "TWD", Name = "New Taiwan Dollar", Symbol = "TWD" },
+          new () { Code = "ZAR", Name = "South African Rand", Symbol = "ZAR" },
+          new () { Code = "BRL", Name = "Brazilian Real", Symbol = "BRL" },
+          new () { Code = "MXN", Name = "Mexican Peso", Symbol = "MXN" },
+          new () { Code = "ARS", Name = "Argentine Peso", Symbol = "ARS" },
+          new () { Code = "CLP", Name = "Chilean Peso", Symbol = "CLP" },
+          new () { Code = "COP", Name = "Colombian Peso", Symbol = "COP" },
+          new () { Code = "PEN", Name = "Peruvian Sol", Symbol = "PEN" },
+          new () { Code = "UYU", Name = "Uruguayan Peso", Symbol = "UYU" },
+          new () { Code = "NOK", Name = "Norwegian Krone", Symbol = "NOK" },
+          new () { Code = "DKK", Name = "Danish Krone", Symbol = "DKK" },
+          new () { Code = "RUB", Name = "Russian Ruble", Symbol = "RUB" },
+          new () { Code = "VND", Name = "Vietnamese Dong", Symbol = "VND" },
+          new () { Code = "PHP", Name = "Philippine Peso", Symbol = "PHP" },
+          new () { Code = "MYR", Name = "Malaysian Ringgit", Symbol = "MYR" },
+          new () { Code = "IDR", Name = "Indonesian Rupiah", Symbol = "IDR  " }
+
+
+      };
+    }
+
+    private void Selected_From(ChangeEventArgs e)
+    {
+        messages = "";
+        fromCurrency = e.Value.ToString();
+        if (fromCurrency == toCurrency)
+        {
+            messages = "Currency can not the same, select difference";
+
+        }
+
+    }
+
+    private void Selected_To(ChangeEventArgs e)
+    {
+        messages = "";
+        toCurrency = e.Value.ToString();
+        if (fromCurrency == toCurrency)
+        {
+            messages = "Currency can not the same, select difference";
+
+        }
+
+        toCurrencyObj = currencies.FirstOrDefault(c => c.Code == toCurrency);
+        toSymbal = toCurrencyObj?.Symbol ?? "";
+
+    }
+
+    private async Task Convert_currency()
+    {
+        messages = "";
+
+        if (string.IsNullOrEmpty(fromCurrency) || string.IsNullOrEmpty(toCurrency) || string.IsNullOrEmpty(amountToBeConverted))
+        {
+            messages = "Please select both currencies and enter an amount to convert.";
+            return;
+        }
+        if (fromCurrency == toCurrency)
+        {
+            messages = "Currency can not the same, select difference";
+            return;
+        }
+        convertedAmount = await ConvertCurrencyAsync();
+        exchangeRate = convertedAmount / int.Parse(amountToBeConverted);
+        convertedAmount = Math.Round(convertedAmount, 2);
+        exchangeRate = Math.Round(exchangeRate, 2);
+         
+    }
+
+    private async  Task<decimal> ConvertCurrencyAsync()
+    {
+        return await _currencyConverterService.GetConversionRateAsync(fromCurrency, toCurrency, int.Parse(amountToBeConverted));
+
+    }
+
+    private void validate_number()
+    {
+        messages = "";
+
+      if (int.TryParse(amountToBeConverted, out int number))
+        {
+            messages = "";
+        }
+        else
+        {
+            messages = "You must enter number to convert";
+        }
+    }
+
+    public class Currency
+    {
+        public string Code { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string Symbol { get; set; } = "";
+    }
+
+}

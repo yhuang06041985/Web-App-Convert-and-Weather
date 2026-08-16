@@ -1,0 +1,7 @@
+namespace Currency_Convert.Services
+{
+    public class IConverService
+    {
+      Task<decimal> GetConversionRateAsync(string fromCurrency, string toCurrency, decimal amount);
+    }
+}
