@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" width="280" height="120">
+  <defs>
+    <!-- 4 AM Pre-Dawn Sky Gradient (Deep Night Sky with Faint Pre-Dawn Violet/Indigo Horizon) -->
+    <linearGradient id="sky4am" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#020617" />    <!-- Pitch Night Sky Top -->
+      <stop offset="45%" stop-color="#0F172A" />   <!-- Deep Night Blue -->
+      <stop offset="80%" stop-color="#1E1B4B" />   <!-- Pre-Dawn Indigo -->
+      <stop offset="100%" stop-color="#3B0764" />  <!-- Faint Deep Violet Horizon Glow -->
+    </linearGradient>
+
+    <!-- Low Western Setting Moon Radial Glow -->
+    <radialGradient id="moonGlow4am" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#EAB308" stop-opacity="0.2" />
+      <stop offset="75%" stop-color="#6366F1" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Faint Eastern Pre-Dawn Glow -->
+    <radialGradient id="dawnGlow4am" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.4" />
+      <stop offset="50%" stop-color="#7C3AED" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#3B0764" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Pre-Dawn Volumetric Clouds -->
+    <linearGradient id="nightCloudFront4am" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.8" />
+    </linearGradient>
+    <linearGradient id="nightCloudBack4am" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#1E1B4B" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Soft Core Glow Filter -->
+    <filter id="moonCoreGlow4am" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Weather Card Background -->
+  <rect x="8" y="8" width="264" height="104" rx="20" fill="url(#sky4am)" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Faint Pre-Dawn Light on Eastern Horizon (Left Edge) -->
+  <ellipse cx="40" cy="95" rx="60" ry="25" fill="url(#dawnGlow4am)" />
+
+  <!-- Celestial Arc Path -->
+  <path d="M 35 85 Q 140 18 245 85" fill="none" stroke="#6366F1" stroke-width="2" stroke-dasharray="4 4" opacity="0.3" />
+
+  <!-- Pre-Dawn Stars (Fading slightly in east, bright above) -->
+  <circle cx="36" cy="30" r="0.9" fill="#FFFFFF" opacity="0.6" />
+  <circle cx="70" cy="22" r="1.3" fill="#FFFFFF" opacity="0.8" />
+  <circle cx="104" cy="32" r="0.8" fill="#FFFFFF" opacity="0.7" />
+  <circle cx="138" cy="20" r="1.4" fill="#FEF08A" opacity="0.85" />
+  <circle cx="172" cy="28" r="1.0" fill="#FFFFFF" opacity="0.8" />
+  <circle cx="206" cy="22" r="1.2" fill="#FFFFFF" opacity="0.9" />
+  <circle cx="242" cy="36" r="0.8" fill="#FFFFFF" opacity="0.7" />
+
+  <!-- Background Cloud Layer -->
+  <path d="M 25 88 C 25 78 35 72 45 72 C 48 72 52 73 55 75 C 60 67 70 62 82 62 C 95 62 105 70 108 80 C 112 78 116 78 120 78 C 130 78 138 84 138 88 Z" fill="url(#nightCloudBack4am)" />
+
+  <!-- Setting Moon at 4 AM (Low on Western Arc Right Edge) -->
+  <g transform="translate(226, 68)">
+    <!-- Moon Atmosphere Halo -->
+    <circle cx="0" cy="0" r="32" fill="url(#moonGlow4am)" />
+
+    <!-- Moon Core -->
+    <path d="M -9 -16 A 16 16 0 1 0 13 12 A 12 12 0 1 1 -9 -16 Z" fill="#FACC15" filter="url(#moonCoreGlow4am)" />
+    <path d="M -9 -16 A 16 16 0 1 0 13 12 A 12 12 0 1 1 -9 -16 Z" fill="#FEF08A" />
+  </g>
+
+  <!-- Foreground Volumetric Cloud Layer -->
+  <path d="M 80 92 C 80 84 88 78 98 78 C 101 78 104 79 107 81 C 112 73 122 68 134 68 C 147 68 157 76 160 86 C 164 84 169 84 173 84 C 183 84 192 90 192 92 Z" fill="url(#nightCloudFront4am)" opacity="0.85" />
+
+  <!-- Faint Rising Sun Below Eastern Horizon (Preparing for 5 AM Dawn) -->
+  <g transform="translate(40, 78)" opacity="0.12">
+    <circle cx="0" cy="0" r="12" fill="#F97316" />
+  </g>
+</svg>

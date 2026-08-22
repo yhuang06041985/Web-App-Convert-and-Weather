@@ -1,0 +1,39 @@
+@page "/test"
+
+<h1 style="color:red; font-size:32px;">
+	TEST PAGE IS WORKING
+</h1>
+<div class="container-fluid">
+
+	<div class="weather-current">
+    <div class="row">
+      <div class="col-5">
+		<span class="weather-label">  Nashville, Tennessee </span>
+   </div> 
+  </div>
+</div>
+</div>
+
+@code {
+
+    CurrentDto current = new CurrentDto();
+
+    protected override void OnInitialized()
+    {
+        SetUpCurrent();
+
+
+    }
+
+    private void SetUpCurrent()
+    {
+        current.Temperature = "82°F";
+        current.Description = "Mainly clear";
+        current.IconUrl = "./images/Weather SVG/Mainly clear.svg";
+        current.TemperatureLike = "Feel likes 87°F";
+        current.Humidity = "60%";
+        current.WindSpeed = "20 mph";
+        current.Time = "Thursday, August 20";
+    }
+    
+}

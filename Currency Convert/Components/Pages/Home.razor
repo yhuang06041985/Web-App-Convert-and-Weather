@@ -1,5 +1,61 @@
 @page "/"
+@inject AppDbContext _dbContext
 
 <PageTitle>Home</PageTitle>
 
 <h3>Welcome to Home Page</h3>
+
+<h6> @message </h6>
+@code
+{
+    string message = string.Empty;
+    List<WeatherCode> weatherCodes = new();
+
+    protected override void OnInitialized()
+    {
+        //message = ToComplicateDay("2026-08-20T06:00");
+        message = ToComplicateTime("2026-08-20T06:00");
+    }
+
+    private string ToComplicateDay(string input)
+    {
+        var index = input.IndexOf("T");
+        input =  input.Substring(0, index);
+        DateTime dt = DateTime.Parse(input);
+        return dt.ToString("dddd, MMMM d");
+    }
+
+    private string ToShortDay(string input)
+    {
+
+        var index = input.IndexOf("T");
+        input = input.Substring(0, index);
+        DateTime dt = DateTime.Parse(input).Date;
+
+        if (dt == DateTime.Today)
+            return "Today";
+
+        return dt.ToString("ddd");
+    }
+
+    private string ToComplicateTime(string input)
+    {
+        var index = input.IndexOf("T") + 1;
+        input = input.Substring(index);
+
+        DateTime dt = DateTime.Parse(input);
+        return dt.ToString("h tt");
+    }
+
+    private string ToTime(string input)
+    {
+        var index = input.IndexOf("T") + 1;
+        return input.Substring(index);
+    }
+
+    private string ToDate(string input)
+    {
+        var index = input.IndexOf("T");
+        return input.Substring(0, index);
+    }
+}

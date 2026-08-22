@@ -1,12 +1,21 @@
 using Currency_Convert.Components;
-using Microsoft.AspNetCore.Components.Server;
 using Currency_Convert.Service;
-
+using Microsoft.AspNetCore.Components.Server;
+using Microsoft.EntityFrameworkCore;
+using Currency_Convert.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient<IConvertCurrence, ConvertCurrence>();
-   
+builder.Services.AddHttpClient<IWeatherCast, WeatherCast>();
+builder.Services.AddScoped<IDataFormat, DataFormat>();
+
+//builder.Services.AddScoped<IWeatherCast, WeatherCast>();
+
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+  );
+
 
 // Add services to the container
 builder.Services.AddRazorComponents()
@@ -24,6 +33,9 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
 
 app.UseAntiforgery();
 

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" width="280" height="120">
+  <defs>
+    <!-- 6 PM Sunset/Dusk Sky Gradient (Deep Twilight Purple, Crimson, and Amber Glow) -->
+    <linearGradient id="sky6pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />    <!-- Night Slate Top -->
+      <stop offset="35%" stop-color="#312E81" />   <!-- Deep Twilight Purple -->
+      <stop offset="65%" stop-color="#881337" />   <!-- Deep Crimson Dusk -->
+      <stop offset="85%" stop-color="#E11D48" />   <!-- Vibrant Sunset Rose -->
+      <stop offset="100%" stop-color="#F59E0B" />  <!-- Horizon Amber Glow -->
+    </linearGradient>
+
+    <!-- Crimson Dusk Sunset Radial Glow -->
+    <radialGradient id="sun6pmGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.9" />
+      <stop offset="30%" stop-color="#F97316" stop-opacity="0.75" />
+      <stop offset="65%" stop-color="#BE185D" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#312E81" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Twilight Cloud Gradients (Silhouetted against Crimson Horizon) -->
+    <linearGradient id="cloudFront6pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDA4AF" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="#881337" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#1E1B4B" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="cloudBack6pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.6" />
+    </linearGradient>
+
+    <!-- Sun Core Glow Filter -->
+    <filter id="sun6pmCoreGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Weather Card Background -->
+  <rect x="8" y="8" width="264" height="104" rx="20" fill="url(#sky6pm)" stroke="#312E81" stroke-width="1.5" />
+
+  <!-- Celestial Arc Path -->
+  <path d="M 35 85 Q 140 18 245 85" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 4" opacity="0.35" />
+
+  <!-- Early Stars Appearing in Sky -->
+  <g fill="#FFFFFF" opacity="0.6">
+    <circle cx="35" cy="24" r="1" />
+    <circle cx="70" cy="20" r="1.2" opacity="0.8" />
+    <circle cx="115" cy="18" r="0.9" />
+  </g>
+
+  <!-- Background Cloud Layer -->
+  <path d="M 25 88 C 25 78 35 72 45 72 C 48 72 52 73 55 75 C 60 67 70 62 82 62 C 95 62 105 70 108 80 C 112 78 116 78 120 78 C 130 78 138 84 138 88 Z" fill="url(#cloudBack6pm)" />
+
+  <!-- 6 PM Sunset Sun (Touch Point at Horizon End of Arc) -->
+  <g transform="translate(230, 78)">
+    <!-- Atmosphere Sun Halo -->
+    <circle cx="0" cy="0" r="32" fill="url(#sun6pmGlow)" />
+
+    <!-- Sun Core Touching Horizon -->
+    <circle cx="0" cy="0" r="13" fill="#BE185D" filter="url(#sun6pmCoreGlow)" />
+    <circle cx="0" cy="0" r="10" fill="#FEF08A" />
+
+    <!-- Low Horizon Rays -->
+    <g stroke="#F97316" stroke-width="2" stroke-linecap="round" opacity="0.85">
+      <line x1="0" y1="-21" x2="0" y2="-15" />
+      <line x1="-21" y1="0" x2="-15" y2="0" />
+      <line x1="15" y1="0" x2="21" y2="0" />
+      <line x1="-15" y1="-15" x2="-10" y2="-10" />
+      <line x1="10" y1="-10" x2="15" y2="-15" />
+    </g>
+  </g>
+
+  <!-- Foreground Volumetric Cloud Layer -->
+  <path d="M 80 92 C 80 84 88 78 98 78 C 101 78 104 79 107 81 C 112 73 122 68 134 68 C 147 68 157 76 160 86 C 164 84 169 84 173 84 C 183 84 192 90 192 92 Z" fill="url(#cloudFront6pm)" opacity="0.85" />
+</svg>

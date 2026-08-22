@@ -65,7 +65,7 @@
                 <h4 class="text-danger">@messages   </h4>
                 @if (convertedAmount > 0)
                 {
-                    <p><h4>Convert Rate: @exchangeRate</h4></p>
+                    <p><h4>Convert Rate to: @toCurrencyObj.Name  @exchangeRate</h4></p>
                     <p><h4 class="text-success">Convert Amount: @convertedAmount  @toSymbal</h4> </p>
                 }
                 
@@ -153,27 +153,58 @@
         toCurrencyObj = currencies.FirstOrDefault(c => c.Code == toCurrency);
         toSymbal = toCurrencyObj?.Symbol ?? "";
 
+
     }
 
     private async Task Convert_currency()
     {
-        messages = "";
+        messages = string.Empty;
+        bool isValidae = true;
 
-        if (string.IsNullOrEmpty(fromCurrency) || string.IsNullOrEmpty(toCurrency) || string.IsNullOrEmpty(amountToBeConverted))
+        if (string.IsNullOrEmpty(fromCurrency))
         {
-            messages = "Please select both currencies and enter an amount to convert.";
+            messages = "Please select from currency";
+            isValidae = false;
+        }
+        if (string.IsNullOrEmpty(toCurrency))
+        {
+            if (isValidae)
+            {
+                messages = "Please select to currency";
+                isValidae = false;
+            }
+            else
+                messages += ", to currency";
+
+        }
+        if (string.IsNullOrEmpty(amountToBeConverted))
+        {
+            if (isValidae)
+                messages = "Please enter amount to convert ";
+            else
+                messages += " and enter an amount to convert.";          
+        }
+        if (!isValidae)
+        {
             return;
         }
+        
         if (fromCurrency == toCurrency)
         {
             messages = "Currency can not the same, select difference";
             return;
         }
+        if (!int.TryParse(amountToBeConverted, out int number) || number <= 0)
+        {
+            messages = "You must enter a valid amount greater than zero.";
+            return;
+        }
+
         convertedAmount = await ConvertCurrencyAsync();
         exchangeRate = convertedAmount / int.Parse(amountToBeConverted);
         convertedAmount = Math.Round(convertedAmount, 2);
         exchangeRate = Math.Round(exchangeRate, 2);
-         
+        
     }
 
     private async  Task<decimal> ConvertCurrencyAsync()
@@ -186,9 +217,12 @@
     {
         messages = "";
 
-      if (int.TryParse(amountToBeConverted, out int number))
+        if (int.TryParse(amountToBeConverted, out int number))
         {
-            messages = "";
+            if (  int.Parse(amountToBeConverted) <= 0)
+            {
+                messages = "You must enter amount greater than zero.";
+            }
         }
         else
         {

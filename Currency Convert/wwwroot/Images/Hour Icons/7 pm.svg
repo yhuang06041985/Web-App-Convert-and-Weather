@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" width="280" height="120">
+  <defs>
+    <!-- 7 PM Dusk/Dusk-Night Transition Sky Gradient -->
+    <linearGradient id="sky7pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19" />    <!-- Deep Night Top -->
+      <stop offset="40%" stop-color="#1E1B4B" />   <!-- Deep Indigo Dusk -->
+      <stop offset="70%" stop-color="#4C1D95" />   <!-- Twilight Violet -->
+      <stop offset="88%" stop-color="#831843" />   <!-- Fading Magenta Horizon Glow -->
+      <stop offset="100%" stop-color="#9A3412" />  <!-- Last Deep Amber Glow -->
+    </linearGradient>
+
+    <!-- Faint Dusk Moon Glow -->
+    <radialGradient id="moonGlow7pm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#A855F7" stop-opacity="0.3" />
+      <stop offset="80%" stop-color="#1E1B4B" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Evening Dusk Cloud Gradients -->
+    <linearGradient id="cloudFront7pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6B21A8" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="#3B0764" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="cloudBack7pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9D174D" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#020617" stop-opacity="0.6" />
+    </linearGradient>
+
+    <!-- Soft Glow Filter -->
+    <filter id="moonGlowFilter7pm" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Weather Card Background -->
+  <rect x="8" y="8" width="264" height="104" rx="20" fill="url(#sky7pm)" stroke="#1E1B4B" stroke-width="1.5" />
+
+  <!-- Stars Appearing in Twilight -->
+  <g fill="#FFFFFF" opacity="0.75">
+    <circle cx="30" cy="22" r="1.2" />
+    <circle cx="65" cy="18" r="1.5" opacity="0.9" />
+    <circle cx="100" cy="28" r="0.8" />
+    <circle cx="140" cy="16" r="1.2" />
+    <circle cx="180" cy="24" r="1" />
+  </g>
+
+  <!-- Celestial Arc Path -->
+  <path d="M 35 85 Q 140 18 245 85" fill="none" stroke="#A855F7" stroke-width="2" stroke-dasharray="4 4" opacity="0.3" />
+
+  <!-- Background Cloud Layer -->
+  <path d="M 25 88 C 25 78 35 72 45 72 C 48 72 52 73 55 75 C 60 67 70 62 82 62 C 95 62 105 70 108 80 C 112 78 116 78 120 78 C 130 78 138 84 138 88 Z" fill="url(#cloudBack7pm)" />
+
+  <!-- 7 PM Early Moon (Rising Low on Celestial Path as Twilight Takes Over) -->
+  <g transform="translate(48, 72)">
+    <!-- Atmosphere Moon Glow -->
+    <circle cx="0" cy="0" r="32" fill="url(#moonGlow7pm)" />
+
+    <!-- Crescent Moon Core -->
+    <g filter="url(#moonGlowFilter7pm)">
+      <path d="M 10 -10 A 14 14 0 1 0 10 10 A 11 11 0 1 1 10 -10 Z" fill="#FEF3C7" />
+    </g>
+  </g>
+
+  <!-- Foreground Volumetric Cloud Layer -->
+  <path d="M 80 92 C 80 84 88 78 98 78 C 101 78 104 79 107 81 C 112 73 122 68 134 68 C 147 68 157 76 160 86 C 164 84 169 84 173 84 C 183 84 192 90 192 92 Z" fill="url(#cloudFront7pm)" opacity="0.85" />
+</svg>

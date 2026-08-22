@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" width="280" height="120">
+  <defs>
+    <!-- 7 AM Morning Sky Gradient (Transition from Soft Blue Atmosphere to Bright Golden Sunrise Base) -->
+    <linearGradient id="sky7am" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1D4ED8" />    <!-- Rich Morning Blue Sky -->
+      <stop offset="40%" stop-color="#60A5FA" />   <!-- Soft Bright Sky Blue -->
+      <stop offset="70%" stop-color="#A5F3FC" />   <!-- Crisp Early Morning Light -->
+      <stop offset="88%" stop-color="#FDE68A" />   <!-- Soft Golden Glow Transition -->
+      <stop offset="100%" stop-color="#F97316" />  <!-- Bright Horizon Sunrise Tone -->
+    </linearGradient>
+
+    <!-- Fresh 7 AM Sunlight Radial Glow -->
+    <radialGradient id="sun7amGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#FDE047" stop-opacity="0.55" />
+      <stop offset="75%" stop-color="#F97316" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#F97316" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Morning Volumetric Cloud Gradients -->
+    <linearGradient id="cloudFront7am" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#CBD5E1" stop-opacity="0.85" />
+    </linearGradient>
+    <linearGradient id="cloudBack7am" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#94A3B8" stop-opacity="0.35" />
+    </linearGradient>
+
+    <!-- Soft Core Glow Filter -->
+    <filter id="sun7amCoreGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Weather Card Background -->
+  <rect x="8" y="8" width="264" height="104" rx="20" fill="url(#sky7am)" stroke="#3B82F6" stroke-width="1.5" />
+
+  <!-- Celestial Arc Path -->
+  <path d="M 35 85 Q 140 18 245 85" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 4" opacity="0.5" />
+
+  <!-- Background Cloud Layer -->
+  <path d="M 25 88 C 25 78 35 72 45 72 C 48 72 52 73 55 75 C 60 67 70 62 82 62 C 95 62 105 70 108 80 C 112 78 116 78 120 78 C 130 78 138 84 138 88 Z" fill="url(#cloudBack7am)" />
+
+  <!-- 7 AM Morning Sun (Ascending on Eastern Arc) -->
+  <g transform="translate(80, 50)">
+    <!-- Atmosphere Sun Halo -->
+    <circle cx="0" cy="0" r="38" fill="url(#sun7amGlow)" />
+
+    <!-- Sun Core -->
+    <circle cx="0" cy="0" r="15" fill="#F59E0B" filter="url(#sun7amCoreGlow)" />
+    <circle cx="0" cy="0" r="12" fill="#FEF08A" />
+
+    <!-- Bright 7 AM Rays -->
+    <g stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" opacity="0.95">
+      <line x1="0" y1="-26" x2="0" y2="-19" />
+      <line x1="0" y1="19" x2="0" y2="26" />
+      <line x1="-26" y1="0" x2="-19" y2="0" />
+      <line x1="19" y1="0" x2="26" y2="0" />
+      <line x1="-18" y1="-18" x2="-13" y2="-13" />
+      <line x1="13" y1="-13" x2="18" y2="-18" />
+      <line x1="-18" y1="18" x2="-13" y2="13" />
+      <line x1="13" y1="13" x2="18" y2="18" />
+    </g>
+  </g>
+
+  <!-- Foreground Volumetric Cloud Layer -->
+  <path d="M 80 92 C 80 84 88 78 98 78 C 101 78 104 79 107 81 C 112 73 122 68 134 68 C 147 68 157 76 160 86 C 164 84 169 84 173 84 C 183 84 192 90 192 92 Z" fill="url(#cloudFront7am)" opacity="0.9" />
+</svg>

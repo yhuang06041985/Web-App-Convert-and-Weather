@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" width="280" height="120">
+  <defs>
+    <!-- 5 PM Early Sunset / Golden Hour Sky Gradient (Transitioning into Warm Orange/Coral) -->
+    <linearGradient id="sky5pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />    <!-- Deepening Twilight Blue Top -->
+      <stop offset="30%" stop-color="#0284C7" />   <!-- Soft Dusk Azure -->
+      <stop offset="60%" stop-color="#F97316" />   <!-- Rich Golden Hour Orange -->
+      <stop offset="85%" stop-color="#F43F5E" />   <!-- Soft Coral Sunset Tint -->
+      <stop offset="100%" stop-color="#BE185D" />  <!-- Warm Magenta Horizon Glow -->
+    </linearGradient>
+
+    <!-- Warm Golden-Coral Sunset Radial Glow -->
+    <radialGradient id="sun5pmGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#F97316" stop-opacity="0.7" />
+      <stop offset="70%" stop-color="#E11D48" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#E11D48" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Sunset Clouds (Reflecting Golden & Pink Warmth) -->
+    <linearGradient id="cloudFront5pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.92" />
+      <stop offset="50%" stop-color="#FECDD3" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#FDBA74" stop-opacity="0.8" />
+    </linearGradient>
+    <linearGradient id="cloudBack5pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#FCA5A5" stop-opacity="0.35" />
+    </linearGradient>
+
+    <!-- Core Glow Filter -->
+    <filter id="sun5pmCoreGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Weather Card Background -->
+  <rect x="8" y="8" width="264" height="104" rx="20" fill="url(#sky5pm)" stroke="#1E3A8A" stroke-width="1.5" />
+
+  <!-- Celestial Arc Path -->
+  <path d="M 35 85 Q 140 18 245 85" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 4" opacity="0.45" />
+
+  <!-- Background Cloud Layer -->
+  <path d="M 25 88 C 25 78 35 72 45 72 C 48 72 52 73 55 75 C 60 67 70 62 82 62 C 95 62 105 70 108 80 C 112 78 116 78 120 78 C 130 78 138 84 138 88 Z" fill="url(#cloudBack5pm)" />
+
+  <!-- 5 PM Low Sunset Sun (Setting Low on Western Horizon) -->
+  <g transform="translate(214, 68)">
+    <!-- Atmosphere Sun Halo -->
+    <circle cx="0" cy="0" r="36" fill="url(#sun5pmGlow)" />
+
+    <!-- Sun Core -->
+    <circle cx="0" cy="0" r="14" fill="#E11D48" filter="url(#sun5pmCoreGlow)" />
+    <circle cx="0" cy="0" r="11" fill="#FEF08A" />
+
+    <!-- Soft Golden Sunset Rays -->
+    <g stroke="#F97316" stroke-width="2.2" stroke-linecap="round">
+      <line x1="0" y1="-24" x2="0" y2="-17" />
+      <line x1="0" y1="17" x2="0" y2="24" />
+      <line x1="-24" y1="0" x2="-17" y2="0" />
+      <line x1="17" y1="0" x2="24" y2="0" />
+      <line x1="-17" y1="-17" x2="-12" y2="-12" />
+      <line x1="12" y1="-12" x2="17" y2="-17" />
+      <line x1="-17" y1="17" x2="-12" y2="12" />
+      <line x1="12" y1="12" x2="17" y2="17" />
+    </g>
+  </g>
+
+  <!-- Foreground Volumetric Cloud Layer -->
+  <path d="M 80 92 C 80 84 88 78 98 78 C 101 78 104 79 107 81 C 112 73 122 68 134 68 C 147 68 157 76 160 86 C 164 84 169 84 173 84 C 183 84 192 90 192 92 Z" fill="url(#cloudFront5pm)" opacity="0.85" />
+</svg>

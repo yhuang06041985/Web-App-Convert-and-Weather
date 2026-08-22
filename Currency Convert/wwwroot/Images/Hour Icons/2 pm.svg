@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" width="280" height="120">
+  <defs>
+    <!-- 2 PM Early Afternoon Sky Gradient (Bright Azure blue with initial warm tint) -->
+    <linearGradient id="sky2pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7" />    <!-- Deep Azure Blue Top -->
+      <stop offset="50%" stop-color="#38BDF8" />   <!-- Bright Blue Daylight -->
+      <stop offset="85%" stop-color="#7DD3FC" />   <!-- Soft Atmosphere Blue -->
+      <stop offset="100%" stop-color="#FDE68A" />  <!-- Warm Afternoon Horizon Glow -->
+    </linearGradient>
+
+    <!-- Warm 2 PM Sunlight Radial Glow -->
+    <radialGradient id="sun2pmGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="1" />
+      <stop offset="38%" stop-color="#FDE047" stop-opacity="0.7" />
+      <stop offset="72%" stop-color="#F59E0B" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Bright Afternoon Volumetric Cloud Gradients -->
+    <linearGradient id="cloudFront2pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.98" />
+      <stop offset="100%" stop-color="#E0F2FE" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="cloudBack2pm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F1F5F9" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.45" />
+    </linearGradient>
+
+    <!-- Core Glow Filter -->
+    <filter id="sun2pmCoreGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Weather Card Background -->
+  <rect x="8" y="8" width="264" height="104" rx="20" fill="url(#sky2pm)" stroke="#0284C7" stroke-width="1.5" />
+
+  <!-- Celestial Arc Path -->
+  <path d="M 35 85 Q 140 18 245 85" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 4" opacity="0.6" />
+
+  <!-- Background Cloud Layer -->
+  <path d="M 25 88 C 25 78 35 72 45 72 C 48 72 52 73 55 75 C 60 67 70 62 82 62 C 95 62 105 70 108 80 C 112 78 116 78 120 78 C 130 78 138 84 138 88 Z" fill="url(#cloudBack2pm)" />
+
+  <!-- 2 PM Afternoon Sun (Descending on Western Arc) -->
+  <g transform="translate(164, 34)">
+    <!-- Atmosphere Sun Halo -->
+    <circle cx="0" cy="0" r="42" fill="url(#sun2pmGlow)" />
+
+    <!-- Sun Core -->
+    <circle cx="0" cy="0" r="17" fill="#F59E0B" filter="url(#sun2pmCoreGlow)" />
+    <circle cx="0" cy="0" r="14" fill="#FEF08A" />
+
+    <!-- Strong Afternoon Rays -->
+    <g stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round">
+      <line x1="0" y1="-30" x2="0" y2="-22" />
+      <line x1="0" y1="22" x2="0" y2="30" />
+      <line x1="-30" y1="0" x2="-22" y2="0" />
+      <line x1="22" y1="0" x2="30" y2="0" />
+      <line x1="-21" y1="-21" x2="-15" y2="-15" />
+      <line x1="15" y1="-15" x2="21" y2="-21" />
+      <line x1="-21" y1="21" x2="-15" y2="15" />
+      <line x1="15" y1="15" x2="21" y2="21" />
+    </g>
+  </g>
+
+  <!-- Foreground Volumetric Cloud Layer -->
+  <path d="M 80 92 C 80 84 88 78 98 78 C 101 78 104 79 107 81 C 112 73 122 68 134 68 C 147 68 157 76 160 86 C 164 84 169 84 173 84 C 183 84 192 90 192 92 Z" fill="url(#cloudFront2pm)" opacity="0.9" />
+</svg>

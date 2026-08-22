@@ -1,0 +1,14 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <linearGradient id="tempGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1565C0"></stop>
+      <stop offset="25%" stop-color="#42A5F5"></stop>
+      <stop offset="50%" stop-color="#66BB6A"></stop>
+      <stop offset="75%" stop-color="#FFA726"></stop>
+      <stop offset="100%" stop-color="#E53935"></stop>
+    </linearGradient>
+  </defs>
+
+  <line x1="2" y1="12" x2="22" y2="12" stroke="url(#tempGradient)" stroke-width="4" stroke-linecap="round"></line>
+</svg>

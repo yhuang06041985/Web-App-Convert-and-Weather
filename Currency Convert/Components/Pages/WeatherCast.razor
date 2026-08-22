@@ -1,0 +1,192 @@
+@page "/WeatherCast"
+@rendermode InteractiveServer
+
+@inject IWeatherCast _weatherCastService
+@inject NavigationManager _navigationManager
+@inject ILogger<WeatherCast> _logger
+@inject AppDbContext _dbContext
+
+<br />
+<br />
+
+<h3 class="text-center">Weather Cast Application</h3>
+
+<br />
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="form-label" for="cityName">
+                City Name:
+            </label>
+        </div>
+
+        <div class="col-md-6">
+
+            <input id="cityName"
+                   type="text"
+                   class="form-control"
+                   @bind="locationStr"
+                   @bind:event="oninput"
+                   @bind:after="SearchLocations"
+                   style="width: 400px;"
+                   placeholder="Enter city name..." />
+
+            @if (searchLocations.Any())
+            {
+                <ul class="list-group mt-1" style="width: 200px;">
+                    @foreach (var location in searchLocations)
+                    {
+                        <li class="list-group-item"
+                            style="cursor: pointer;"
+                            @onclick="() => SelectLocation(location)">
+
+                            @location.City, @location.State
+
+                        </li>
+                    }
+                </ul>
+            }
+
+            <br />
+
+            <button class="btn btn-primary"
+                    @onclick="GetWeather">
+
+                Get Weather
+
+            </button>
+
+        </div>
+    </div>
+
+    <br />
+
+    @if (weatherResponse != null)
+    {
+        <div class="row">
+            <div class="col-md-8">
+
+                <h4>Weather</h4>
+
+                <!-- Display your weather information here -->
+
+                <p>
+                    Temperature:
+                    
+                </p>
+
+            </div>
+        </div>
+    }
+
+</div>
+
+
+@code {
+
+    private string locationStr = string.Empty;
+
+
+    private WeatherResponse? weatherResponse;
+
+    private List<WorldCity> searchLocations = new();
+    private ForecastDto? forecastDto = new();
+
+    protected override void OnInitialized()
+    {
+        CurrentDto currentDto = new CurrentDto();
+        forecastDto.Current = currentDto;
+        DailyDto dailyDto = new DailyDto();
+        forecastDto.Daily = dailyDto;
+        HourlyDto hourlyDto = new HourlyDto();
+        forecastDto.Hourly = hourlyDto;
+    }
+
+
+  /* private void OnCityNameChanged(ChangeEventArgs e)
+    {
+        locationStr = e.Value?.ToString() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(locationStr))
+        {
+            searchLocations.Clear();
+            return;
+        }
+
+        searchLocations = _dbContext.WorldCitics
+            .Where(c => c.City.StartsWith(locationStr))
+            .Take(5)
+            .ToList();
+    }  */
+
+    private void SearchLocations()
+    {
+        _logger.LogInformation("SearchLocations fired: {Location}", locationStr);
+
+        if (string.IsNullOrWhiteSpace(locationStr))
+        {
+          searchLocations.Clear();
+          return;
+        }
+
+        searchLocations = _dbContext.WorldCities
+        .AsNoTracking()
+        .Where(c => c.City.StartsWith(locationStr))
+        .Take(10)
+        .ToList();
+    }
+
+    private void SelectLocation(WorldCity location)
+    {
+        locationStr = $"{location.City}, {location.State}, {location.Country}";
+
+        searchLocations.Clear();
+    }
+
+
+    private async Task GetWeather()
+    {
+        if (string.IsNullOrWhiteSpace(locationStr))
+        {
+          _logger.LogWarning("City name is empty.");
+          return;
+        }
+
+        var parts = locationStr.Split(',');
+
+        var city = parts[0].Trim();
+
+        var state = parts.Length > 1
+          ? parts[1].Trim()
+          : string.Empty;
+
+        var country = parts.Length > 2
+          ? parts[2].Trim()
+          : string.Empty;
+
+        var selectedLocation = _dbContext.WorldCities
+    .FirstOrDefault(c =>
+        c.City == city &&
+        c.State == state &&
+        c.Country == country);
+
+
+        if (selectedLocation == null)
+        {
+    _logger.LogWarning(
+        "Location not found: {City}, {State}",
+        city,
+        state);
+
+    return;
+        }
+
+
+        forecastDto = await _weatherCastService.GetWeatherAsync(
+    selectedLocation.Latitude,
+    selectedLocation.Longitude);
+            var test = "";
+    }
+}

@@ -1,0 +1,14 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sun -->
+  <circle cx="15" cy="8" r="4" fill="#FFD54F"></circle>
+  <g stroke="#FFD54F" stroke-width="1.3" stroke-linecap="round">
+    <line x1="15" y1="2" x2="15" y2="4"></line>
+    <line x1="15" y1="12" x2="15" y2="14"></line>
+    <line x1="9" y1="8" x2="11" y2="8"></line>
+    <line x1="19" y1="8" x2="21" y2="8"></line>
+  </g>
+
+  <!-- Small cloud -->
+  <path d="M4 17h11a3 3 0 0 0 0-6h-.5A4.5 4.5 0 0 0 6 13.5
+           A3.5 3.5 0 0 0 4 17z" fill="#B0BEC5"></path>
+</svg>
